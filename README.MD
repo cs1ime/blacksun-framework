@@ -65,7 +65,7 @@ reboot
 
 安装win10 21h2
 
-执行Windows更新,下载显卡驱动
+执行Windows更新,下载安装显卡驱动
 
 虚拟机安装sunshine串流软件
 
