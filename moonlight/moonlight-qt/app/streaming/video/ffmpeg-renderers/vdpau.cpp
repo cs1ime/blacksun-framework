@@ -504,7 +504,7 @@ void VDPAURenderer::renderFrame(AVFrame* frame)
     m_NextSurfaceIndex = (m_NextSurfaceIndex + 1) % OUTPUT_SURFACE_COUNT;
 
     if(m_ImguiInited==false){
-        mygui::InvokeInit((SDL_Window*)0x036946395817681d,(void*)0x7fb4619066192d58);
+        mygui::InvokeInit(0,0,m_DisplayWidth,m_DisplayHeight,static_cast<uint64_t>(0x7fb4619066192d58));
         m_ImguiInited=true;
     }
 

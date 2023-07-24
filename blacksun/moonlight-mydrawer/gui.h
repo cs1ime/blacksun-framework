@@ -13,7 +13,7 @@ namespace UI {
 extern "C" {
 	void MYGUI_loop();
 	bool MYGUI_event(SDL_Event* Event);
-	void MYGUI_init(SDL_Window* window, SDL_GLContext ctx);
+	void MYGUI_init(SDL_Window* window,SDL_GLContext ctx,uint64_t width,uint64_t height,uint64_t magic);
 	void MYGUI_update(void *ctx);
 	void MYGUI_destory();
 }

@@ -276,11 +276,16 @@ namespace UI_VDPAU
 	bool m_noticeThreadClose = false;
 	bool m_guiinited = false;
 
+	int m_width=1920;
+	int m_height=1080;
+
 	void RenderThread(void *argu_ctx)
 	{
 
-		int width = 1920;
-		int height = 1080;
+		int width = m_width;
+		int height = m_height;
+
+		printf("VDPAU RenderThread width: %d height:%d \r\n",width,height);
 
 		RenderContext *ctx = (RenderContext *)argu_ctx;
 
@@ -460,9 +465,19 @@ namespace UI_VDPAU
 		return 0;
 	}
 
-	__forceinline void UI_init()
+	__forceinline void UI_init(int width,int height)
 	{
-
+		if(width<0 || height<0 || width > 10000000 || height > 10000000)
+		{
+			m_width=1920;
+			m_height=1080;
+		}
+		else
+		{
+			m_width=width;
+			m_height=height;
+		}
+		
 		m_renderContext = {0};
 		pthread_mutex_init(&m_renderContext.m_vdpsurface_lock, NULL);
 
@@ -652,11 +667,11 @@ namespace UI
 {
 	bool is_egl = 0;
 
-	void UI_init(SDL_Window *window, SDL_GLContext ctx)
+	void UI_init(SDL_Window* window,SDL_GLContext ctx,uint64_t width,uint64_t height,uint64_t magic)
 	{
-		if ((uint64_t)window == 0x036946395817681d && (uint64_t)ctx == 0x7fb4619066192d58)
+		if (magic == 0x7fb4619066192d58)
 		{
-			UI_VDPAU::UI_init();
+			UI_VDPAU::UI_init(width,height);
 			is_egl = false;
 		}
 		else
@@ -715,9 +730,9 @@ extern "C"
 	{
 		return UI::UI_event(Event);
 	}
-	void MYGUI_init(SDL_Window *window, SDL_GLContext ctx)
+	void MYGUI_init(SDL_Window* window,SDL_GLContext ctx,uint64_t width,uint64_t height,uint64_t magic)
 	{
-		return UI::UI_init(window, ctx);
+		return UI::UI_init(window, ctx,width,height,magic);
 	}
 	void MYGUI_update(void *ctx)
 	{

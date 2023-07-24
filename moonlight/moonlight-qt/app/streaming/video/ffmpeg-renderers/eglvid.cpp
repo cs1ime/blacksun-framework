@@ -920,7 +920,7 @@ void EGLRenderer::renderFrame(AVFrame* frame)
         //ImGui_ImplSDL2_InitForOpenGL(m_Window,m_Context);
         //ImGui_ImplOpenGL3_Init("#version 100");
 
-        mygui::InvokeInit(m_Window,m_Context);
+        mygui::InvokeInit(m_Window,m_Context,0,0,0);
 
         m_ImguiInited=true;
     }
