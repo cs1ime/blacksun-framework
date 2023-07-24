@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# Code from https://github.com/pavolelsig/passthrough_helper_ubuntu_20
+
 #Making sure this script runs with elevated privileges
 if [ $EUID -ne 0 ]
 	then
