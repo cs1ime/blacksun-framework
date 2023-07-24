@@ -211,6 +211,7 @@ static pid_t qemukvm_find_pid(std::string vm_name) {
           if (c == '\0')
             c = ' ';
         }
+        cmdline.push_back(0);
         boost::regex regex_name("(?<=-name )[^ ]*");
         boost::smatch match;
         if (boost::regex_search(std::string(cmdline.data()), match, regex_name)) {
