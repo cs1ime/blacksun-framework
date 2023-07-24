@@ -26,10 +26,10 @@ static uint64_t GetRealTime()
 //#define p1d
 //#define p1f
 
-static float getrand()
+static float getrand(float min,float max)
 {
 	std::random_device rd;
-	std::uniform_real_distribution<float>u(0.f, 5.5f);
+	std::uniform_real_distribution<float>u(min, max);
 	std::mt19937 gen(rd());
 	return u(gen);
 }
@@ -74,21 +74,25 @@ void AimFramework::processAimEvent()
 	// float alpha = atan(delta.x / delta.y);
 	float alpha = atan(delta.x / delta.y);
 	aimvec2_t move_step = aimvec2_t(step*sin(alpha), step*cos(alpha));
-	float ra = getrand();
-	aimvec2_t rand_reduce = aimvec2_t(ra*sin(alpha), ra*cos(alpha));
+
 	move_step.x = abs(move_step.x); move_step.y= abs(move_step.y);
 	aimvec2_t move_edge = move_step * aimvec2_t(2.f, 2.f);
 	{
 		aimvec2_t move = delta;
 
+		float ra = getrand(0.f,step / 4.f);
+		float actual_step=step-ra;	
+		aimvec2_t actual_move_step = aimvec2_t(actual_step*sin(alpha), actual_step*cos(alpha));
+		actual_move_step.x = abs(actual_move_step.x); actual_move_step.y= abs(actual_move_step.y);
+
 		if (move.x > move_edge.x)
-			move.x = move_step.x;
+			move.x = actual_move_step.x;
 		if (move.y > move_edge.y)
-			move.y = move_step.y;
+			move.y = actual_move_step.y;
 		if (move.x < -move_edge.x)
-			move.x = -move_step.x;
+			move.x = -actual_move_step.x;
 		if (move.y < -move_edge.y)
-			move.y = -move_step.y;
+			move.y = -actual_move_step.y;
 
 		p1f(move.x);
 		p1f(move.y);
