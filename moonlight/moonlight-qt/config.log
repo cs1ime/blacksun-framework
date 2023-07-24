@@ -1,0 +1,16 @@
+executing config test SL
++ cd /home/zxc/Desktop/Moonlight/moonlight-qt/config.tests/SL && /usr/lib/qt5/bin/qmake  -spec /usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ "CONFIG -= qt debug_and_release app_bundle lib_bundle" /home/zxc/Desktop/Moonlight/moonlight-qt/config.tests/SL
++ cd /home/zxc/Desktop/Moonlight/moonlight-qt/config.tests/SL && MAKEFLAGS= make
+> g++ -c -pipe -O2 -Wall -Wextra -fPIC  -I. -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -o main.o main.cpp
+> main.cpp:1:10: fatal error: SLVideo.h: No such file or directory
+>     1 | #include <SLVideo.h>
+>       |          ^~~~~~~~~~~
+> compilation terminated.
+> make: *** [Makefile:276: main.o] Error 1
+test SL FAILED
+executing config test EGL
++ cd /home/zxc/Desktop/Moonlight/moonlight-qt/config.tests/EGL && /usr/lib/qt5/bin/qmake  -spec /usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ "CONFIG -= qt debug_and_release app_bundle lib_bundle" /home/zxc/Desktop/Moonlight/moonlight-qt/config.tests/EGL
++ cd /home/zxc/Desktop/Moonlight/moonlight-qt/config.tests/EGL && MAKEFLAGS= make
+> g++ -c -pipe -O2 -Wall -Wextra -fPIC -D_REENTRANT -I. -I/usr/include/SDL2 -I/usr/include/x86_64-linux-gnu -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -o main.o main.cpp
+> g++ -Wl,-O1 -o EGL main.o   -lSDL2 -lEGL -lavcodec -lavutil   
+test EGL succeeded

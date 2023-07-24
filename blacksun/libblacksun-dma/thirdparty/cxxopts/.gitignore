@@ -1,0 +1,9 @@
+*.swp
+build*/
+CMakeCache.txt
+Makefile
+CMakeFiles/
+Testing/
+CTestTestfile.cmake
+cmake_install.cmake
+bazel-*

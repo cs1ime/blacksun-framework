@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CFBundleExecutable</key>
+	<string>Moonlight</string>
+	<key>CFBundleGetInfoString</key>
+	<string>Stream games from your NVIDIA GameStream-enabled PC</string>
+	<key>CFBundleIconFile</key>
+	<string>moonlight</string>
+	<key>CFBundleIdentifier</key>
+	<string>com.moonlight-stream.Moonlight</string>
+	<key>NSHighResolutionCapable</key>
+	<true/>
+	<key>CFBundlePackageType</key>
+	<string>APPL</string>
+	<key>CFBundleSignature</key>
+	<string>????</string>
+	<key>LSMinimumSystemVersion</key>
+	<string>10.14</string>
+	<key>NSPrincipalClass</key>
+	<string>NSApplication</string>
+	<key>NSSupportsAutomaticGraphicsSwitching</key>
+	<true/>
+	<key>CFBundleVersion</key>
+	<string>VERSION</string>
+	<key>CFBundleShortVersionString</key>
+	<string>VERSION</string>
+	<key>CFBundleDisplayName</key>
+	<string>Moonlight</string>
+</dict>
+</plist>
