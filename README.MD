@@ -15,13 +15,6 @@ blacksun QEMU/KVM 辅助开发框架
 
 环境: Ubuntu 22.04.2 LTS
 
-### 编译辅助
-
-```bash
-./setup-build-env.sh
-./build.sh
-```
-
 ### 准备硬件
 
 Ubuntu需要核显或者一张显卡来给moonlight做解码,还需要一张显卡直通进虚拟机运行游戏
@@ -69,6 +62,14 @@ reboot
 
 虚拟机安装sunshine串流软件
 
+
+### 编译辅助
+
+```bash
+./setup-build-env.sh
+./build.sh
+```
+
 ### 运行辅助
 
 ```bash
@@ -79,6 +80,11 @@ cd build/apex
 辅助会启动一个moonlight,连接虚拟机,显示设置仅在第二个显示器上显示
 
 下载安装Apex,运行游戏就能看到辅助效果,鼠标侧键自瞄
+
+ToDoList:
+
+- [ ]  学习计算机图形学,并尝试做出UE引擎的外部光线追踪写法
+- [ ]  实现 EPT 读写执行分离,做一个Hook引擎和CEServer调试器
 
 效果截图:
 
