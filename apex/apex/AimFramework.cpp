@@ -70,7 +70,7 @@ void AimFramework::processAimEvent()
 	p1f(step);
 	aimvec2_t real_delta = m_targetPosition - center;
 	aimvec2_t delta = m_targetPosition - center;
-	delta=delta / aimvec2_t(5.5f,5.5f);
+	delta=delta / aimvec2_t(6.5f,6.5f);
 	// float alpha = atan(delta.x / delta.y);
 	float alpha = atan(delta.x / delta.y);
 	aimvec2_t move_step = aimvec2_t(step*sin(alpha), step*cos(alpha));
