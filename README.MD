@@ -4,7 +4,7 @@ blacksun QEMU/KVM 辅助开发框架
 
 已经做到
 
-- 绘制和读写都在虚拟机外部实现,完美过一切反作弊检测(云游戏厂商都用的KVM虚拟机)
+- 绘制和读写都在虚拟机外部实现,完美过一切反作弊外挂检测(云游戏厂商都用的KVM虚拟机)
 - 修改moonlight源码实现imgui绘制,兼容vaapi(opengl),vdpau(sdlrender)
 - 利用NAT网络通信以做到超低延迟的moonlight串流画面
 - 通过对moonlight发送SDL_Event实现键鼠模拟
