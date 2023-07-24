@@ -77,11 +77,11 @@ static void qemukvm_process_enummem(
     uint32_t offset = 0;
     uint32_t dev_major = 0, dev_minor = 0;
     int inode = 0;
-    char pathname[1024] = {0};
+    char pathname[1050] = {0};
 
     char prot[5] = {0};
-    sscanf(line, "%llx-%llx %4s %x %x:%x %d %1024s", &addr_begin, &addr_end,
-           prot, &offset, &dev_major, &dev_minor, &inode, &pathname);
+    sscanf(line, "%lx-%lx %4s %x %x:%x %d %1024s", &addr_begin, &addr_end,
+           prot, &offset, &dev_major, &dev_minor, &inode, pathname);
     if (prot[0] == 'r' && prot[1] == 'w' && prot[3] == 'p') {
       uint64_t memsz = addr_end - addr_begin;
       if (!callback(pathname, addr_begin, memsz))
