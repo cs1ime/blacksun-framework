@@ -15,7 +15,7 @@ blacksun QEMU/KVM 辅助开发框架
 
 环境: Ubuntu 22.04.2 LTS
 
-### 编译辅助:
+### 编译辅助
 
 ```bash
 ./setup-build-env.sh
