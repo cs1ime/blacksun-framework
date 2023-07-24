@@ -22,7 +22,7 @@ blacksun QEMU/KVM 辅助开发框架
 ./build.sh
 ```
 
-### 虚拟机搭建
+### 准备硬件
 
 Ubuntu需要核显或者一张显卡来给moonlight做解码,还需要一张显卡直通进虚拟机运行游戏
 
@@ -30,7 +30,20 @@ Ubuntu需要核显或者一张显卡来给moonlight做解码,还需要一张显�
 
 台式电脑如果没核显的话就得自行购买亮机卡了
 
-先运行显卡直通脚本
+### 虚拟机搭建
+
+安装Ubuntu 22.04.2 LTS
+
+禁用Wayland 
+
+```
+sudo apt install -y vim
+sudo vim /etc/gdm3/custom.conf
+
+取消注释 /etc/gdm3/custom.conf 中的 #WaylandEnable=false
+```
+
+运行显卡直通脚本
 
 ```bash
 cd gpu-passthrough
