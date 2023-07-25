@@ -85,7 +85,7 @@ bool blackcontroller::Launch(std::string vm) __attribute__((noinline)){
                 if (qemukvm->read_physical_memory(0, (u8*)&testbyte, 1)) {
                     auto creator = std::make_shared<ntfunc_creator>(factory, qemukvm);
                     auto fns = creator->try_create();
-                    if (fns->is_valid()) {
+                    if (fns != nullptr && fns->is_valid()) {
                         puts("detected guest system");
                         long long loop_start_time = util::GetTickCount();
                         m_nt=fns;

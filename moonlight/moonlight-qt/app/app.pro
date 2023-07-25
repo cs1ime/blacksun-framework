@@ -189,7 +189,6 @@ SOURCES += \
     wm.cpp
 
 HEADERS += \
-    XorStr.hpp \
     backend/nvaddress.h \
     backend/nvapp.h \
     cli/pair.h \
@@ -200,7 +199,6 @@ HEADERS += \
     imgui/imgui.h \
     imgui/imgui_internal.h \
     mygui.h \
-    rc4.h \
     settings/compatfetcher.h \
     settings/mappingfetcher.h \
     utils.h \

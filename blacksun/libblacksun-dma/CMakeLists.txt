@@ -17,4 +17,4 @@ add_library(${PROJECT_NAME} main.cpp)
 
 target_link_libraries(${PROJECT_NAME} PUBLIC COMPONMENT_DMA COMPONMENT_PDB COMPONMENT_QEMUKVM COMPONMENT_RAWMEMFILE)
 
-target_compile_options(${PROJECT_NAME} PRIVATE -w -O3 -fdeclspec -fms-extensions)
+

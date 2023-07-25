@@ -67,6 +67,7 @@ source_group(src FILES
 add_library(raw_pdb
     ${SOURCES}
 )
+target_compile_options(raw_pdb PRIVATE -w -fdeclspec -fms-extensions)
 
 target_include_directories(raw_pdb
   PUBLIC
