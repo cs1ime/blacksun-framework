@@ -15,7 +15,7 @@ Environment: Ubuntu 22.04.2 LTS
 
 ### Prepare
 
-Ubuntu needs a cpu integrated graphics or a discrete graphics card to decode video for moonlight, and pass the discrete graphics card through to the virtual machine to run games
+Ubuntu needs a cpu integrated graphics or a discrete graphics card to decode video for moonlight. In addition, another powerful graphics card is needed to passthrough directly into the KVM virtual machine to run games.
 
 A laptop with a discrete graphics card can meet this requirement. Change the graphics device of the laptop to integrated graphics, and then connect the EDID Spoofer or a monitor to the HDMI port of the discrete graphics card to meet the requirements.
 
