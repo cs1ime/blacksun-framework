@@ -2,7 +2,7 @@
 
 Already done
 
-- Memory access and rendering both run outside the virtual machine, bypass all anti-cheat detections, because cloud gaming service providers often use KVM.
+- Memory access and rendering both run outside the virtual machine, it is possible to bypass all anti-cheating detections, because cloud gaming service providers often use KVM.
 - Modify Moonlight source code to render with imgui, compatible with vaapi(opengl), vdpau(sdlrender).
 - Achieve ultra-low latency Moonlight game streaming with NAT network mode.
 - Simulate keyboard and mouse input by sending SDL_Event to Moonlight.
