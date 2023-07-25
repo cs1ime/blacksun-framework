@@ -1,3 +1,5 @@
+//Copied from https://github.com/zouxianyu/query-pdb and made some modifications.
+
 #include "pdb_helper.h"
 
 uint8_t GetLeafSize(PDB::CodeView::TPI::TypeRecordKind kind) {
