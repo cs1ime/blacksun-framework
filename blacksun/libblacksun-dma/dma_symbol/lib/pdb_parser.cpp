@@ -1,3 +1,5 @@
+//Copied from https://github.com/zouxianyu/query-pdb and made some modifications.
+
 #include "pdb_parser.h"
 #include "pdb_helper.h"
 #include <spdlog/spdlog.h>
