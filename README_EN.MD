@@ -7,7 +7,7 @@ Already done
 - Achieve ultra-low latency Moonlight game streaming with NAT network mode.
 - Simulate keyboard and mouse input by sending SDL_Event to Moonlight.
 - Simulate a mouse with a 100Hz polling rate to achieve more realistic aiming.
-- Block side mouse button (the button that triggers aiming) inputs to the virtual machine to avoid aim detection.
+- Block side mouse button (the button that triggers aiming) inputs to the virtual machine to avoid some aim detection.
 
 ## Instructions:
 
