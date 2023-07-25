@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.2.0)
+cmake_minimum_required(VERSION 3.20)
 project(COMPONMENT_PDB C CXX)
 
 add_library(${PROJECT_NAME}
@@ -8,7 +8,7 @@ ExampleMemoryMappedFile.cpp
 pdb_helper.cpp
 pdb_parser.cpp
 )
-target_compile_options(${PROJECT_NAME} PRIVATE -w -O3 -fdeclspec -fms-extensions)
+target_compile_options(${PROJECT_NAME} PRIVATE -w -fdeclspec -fms-extensions)
 target_include_directories(${PROJECT_NAME} PUBLIC ../include)
 
 set_target_properties(

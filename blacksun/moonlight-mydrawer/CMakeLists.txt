@@ -1,3 +1,5 @@
+cmake_minimum_required(VERSION 3.20)
+
 project(moonlight-mydrawer C CXX)
 
 add_subdirectory(imgui)

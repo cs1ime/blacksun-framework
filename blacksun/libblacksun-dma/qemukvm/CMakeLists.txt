@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.2.0)
+cmake_minimum_required(VERSION 3.20)
 
 project(COMPONMENT_QEMUKVM C CXX)
 #set(Boost_USE_STATIC_LIBS        ON)  # only find static libs
@@ -10,7 +10,7 @@ find_package(Boost COMPONENTS regex)
 
 if(Boost_FOUND) 
     add_library(${PROJECT_NAME} src/qemukvm2dma.cpp)
-    target_compile_options(${PROJECT_NAME} PRIVATE -w -O3 -fdeclspec -fms-extensions)
+    #target_compile_options(${PROJECT_NAME} PRIVATE -w -fdeclspec -fms-extensions)
 
     target_include_directories(${PROJECT_NAME} PUBLIC ./include)
     target_link_libraries(${PROJECT_NAME} fmt ${Boost_LIBRARIES} COMPONMENT_DMA)
