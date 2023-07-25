@@ -8,7 +8,7 @@ blacksun QEMU/KVM 辅助开发框架
 - 修改moonlight源码实现imgui绘制,兼容vaapi(opengl),vdpau(sdlrender)
 - 利用NAT网络通信以做到超低延迟的moonlight串流画面
 - 通过对moonlight发送SDL_Event实现键鼠模拟
-- 模拟100hz回报率的鼠标进行自瞄以做到真实丝滑的自瞄效果
+- 模拟100hz回报率的鼠标进行自瞄以做到丝滑的自瞄效果
 - 屏蔽鼠标侧键(触发自瞄的按键)输入虚拟机以做到更隐蔽的自瞄
 
 ## 使用方法:
