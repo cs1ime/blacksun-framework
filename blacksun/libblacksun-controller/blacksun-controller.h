@@ -12,7 +12,7 @@
 #include <string>
 #include <functional>
 
-using CONTROLLER_FUNCTION_SWITCH_GAME_PROCESS = std::function<int(void*,std::shared_ptr<ntfuncs>)>;
+using CONTROLLER_FUNCTION_FIND_GAME_PROCESS = std::function<int(void*,std::shared_ptr<ntfuncs>)>;
 using CONTROLLER_FUNCTION_NOTICE_GAME_START = std::function<void(void*,std::shared_ptr<ntfuncs>,std::shared_ptr<process>)>;
 using CONTROLLER_FUNCTION_NOTICE_GAME_QUIT = std::function<void(void*,std::shared_ptr<ntfuncs>,std::shared_ptr<process>)>;
 using CONTROLLER_FUNCTION_NOTICE_UPDATE = std::function<void(void*,std::shared_ptr<ntfuncs>,std::shared_ptr<process>)>;
@@ -26,12 +26,12 @@ public:
     ~blackcontroller(){
 
     }
-    void setFuncs(CONTROLLER_FUNCTION_SWITCH_GAME_PROCESS switchGameProcess,
+    void setFuncs(CONTROLLER_FUNCTION_FIND_GAME_PROCESS findGameProcess,
                   CONTROLLER_FUNCTION_NOTICE_GAME_START noticeGameStart,
                   CONTROLLER_FUNCTION_NOTICE_GAME_QUIT noticeGameQuit,
                   CONTROLLER_FUNCTION_NOTICE_UPDATE noticeUpdate)
     {
-        m_switchGameProcess=switchGameProcess;
+        m_findGameProcess=findGameProcess;
         m_noticeGameStart=noticeGameStart;
         m_noticeGameQuit=noticeGameQuit;
         m_noticeUpdate=noticeUpdate;
@@ -54,7 +54,7 @@ private:
     void* m_context = nullptr;
     int m_invertal=10;
 
-    CONTROLLER_FUNCTION_SWITCH_GAME_PROCESS m_switchGameProcess=nullptr;
+    CONTROLLER_FUNCTION_FIND_GAME_PROCESS m_findGameProcess=nullptr;
     CONTROLLER_FUNCTION_NOTICE_GAME_START m_noticeGameStart=nullptr;
     CONTROLLER_FUNCTION_NOTICE_GAME_QUIT m_noticeGameQuit=nullptr;
     CONTROLLER_FUNCTION_NOTICE_UPDATE m_noticeUpdate=nullptr;

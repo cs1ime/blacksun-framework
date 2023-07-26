@@ -17,7 +17,7 @@ void blackcontroller::RunTime() __attribute__((noinline)){
         m_nt->getmmu()->invtlb();
         if (m_nt->getmmu()->chkvirt(0xfffff78000000000) == 0)
             break;
-        if((pid=m_switchGameProcess(m_context,m_nt))!=0){
+        if((pid=m_findGameProcess(m_context,m_nt))!=0){
             m_nt->getmmu()->invtlb();
             if(m_nt->pidexist(pid)){
                 auto p=m_nt->p(pid);
@@ -63,7 +63,7 @@ void blackcontroller::RunTime() __attribute__((noinline)){
 }
 
 bool blackcontroller::Launch(std::string vm) __attribute__((noinline)){
-    if(m_switchGameProcess==nullptr || m_noticeGameQuit==nullptr || m_noticeGameStart==nullptr || m_noticeUpdate==nullptr)
+    if(m_findGameProcess==nullptr || m_noticeGameQuit==nullptr || m_noticeGameStart==nullptr || m_noticeUpdate==nullptr)
         return false;
     auto ms_downloader = std::make_unique<downloader>(
       "save", "https://msdl.microsoft.com/download/symbols/");

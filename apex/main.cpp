@@ -23,7 +23,7 @@ namespace Apex {
 blackcontroller *m_dma=0;
 backend *m_backend=0;
 
-uint64_t switchGameProcess(void* context,std::shared_ptr<ntfuncs> nt){
+uint64_t findGameProcess(void* context,std::shared_ptr<ntfuncs> nt){
     uint64_t pid= nt->findpid(xs("r5apex.exe"));
     puts("1");
     fflush(stdout);
@@ -60,7 +60,7 @@ int main(){
     puts("start");
     m_dma= new blackcontroller();
 
-    m_dma->setFuncs(switchGameProcess,noticeGameStart,noticeGameQuit,noticeUpdate);
+    m_dma->setFuncs(findGameProcess,noticeGameStart,noticeGameQuit,noticeUpdate);
     m_dma->setInterval(5);
     m_dma->Launch("win10");
 
