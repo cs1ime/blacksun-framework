@@ -64,7 +64,7 @@ void AimFramework::processAimEvent()
 	//float mouseMoveSpeed=3000.f; //假设鼠标每秒移动3000个像素
 
 	float inch = sqrt(width*width + height*height);
-	float step = 22.f * (inch / 2202.f);
+	float step = 22.f ;//* (inch / 2202.f);
 	//float step = (mouseMoveSpeed / m_aimRate);
 	
 	p1f(step);
