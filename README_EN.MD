@@ -101,3 +101,10 @@ Download Apex and enjoy it.
 
 ![1](./screenshots/1.PNG)
 
+Aiming effect:
+
+<video width="640" height="360" controls>
+  <source src="videos/aimingeffect.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
+
