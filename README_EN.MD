@@ -72,7 +72,7 @@ Install Windows10 21h2 in the virtual machine
 
 Run Windows Update, manually download and install the graphics card driver
 
-Install (Sunshine)[https://github.com/LizardByte/Sunshine] in the virtual machine
+Install [Sunshine](https://github.com/LizardByte/Sunshine) in the virtual machine
 
 
 ### Compile
