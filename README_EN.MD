@@ -21,7 +21,7 @@ A laptop with a discrete graphics card can meet this requirement. Change the gra
 
 If you're using a desktop computer and the CPU's integrated graphics can work with a discrete graphics card, you'll need an EDID Spoofer. You should connect your monitor to the CPU's integrated graphics, and connect the EDID Spoofer to the discrete graphics card.
 
-If you're using a desktop computer and your CPU doesn't have integrated graphics, you need to ensure that your computer motherboard has two PCIE X16 slots. You'll need an EDID Spoofer, a GT1030 graphics card, and make sure your power supply is sufficient. Take off the original graphics card from your computer, install the GT1030 into the first PCIE X16 slot on the motherboard, and place your original graphics card into the second PCIE X16 slot. This is done so that Ubuntu will treat the GT1030 as the Boot VGA device. Connect the monitor to the GT1030, and connect the EDID Spoofer to your original graphics card. Additionally, you need to install the NVIDIA graphics driver for Ubuntu.
+If you're using a desktop computer and your CPU doesn't have integrated graphics, you need to ensure that your computer motherboard has two PCIe x16 slots. You'll need an EDID Spoofer, a GT1030 graphics card, and make sure your power supply is sufficient. Take off the original graphics card from your computer, install the GT1030 into the first PCIe x16 slot on the motherboard, and place your original graphics card into the second PCIe x16 slot. This is done so that Ubuntu will treat the GT1030 as the Boot VGA device. Connect the monitor to the GT1030, and connect the EDID Spoofer to your original graphics card. Additionally, you need to install the NVIDIA graphics driver for Ubuntu.
 
 ### Installation
 
