@@ -107,5 +107,5 @@ cd build/apex
 
 自瞄效果:
 
-./videos/aimingeffect.mp4
+[video](https://github.com/cs1ime/blacksun-framework/blob/master/videos/aimingeffect.mp4)
 
