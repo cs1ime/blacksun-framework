@@ -282,6 +282,18 @@ namespace UI_VDPAU
 	void RenderThread(void *argu_ctx)
 	{
 
+		/* 这个overlay采用的是sdl软渲染方案,cpu渲染出imgui的像素之后采用双缓冲方案将像素融合到帧上面,需要占用cpu的一个core
+		 * 下面这个长宽是描述的sdl软渲染图像数据的长宽,你可以修改这个参数来降低cpu负载
+		 * 降低msleep的延迟就能提升overlay的刷新速度
+		 *
+   		 * This overlay is using SDL software rendering , decrease width and height can improve performance
+		 * Decrease the delay of msleep can increase refresh rate of overlay
+                 * 
+		 * for example:
+  		 * int width = m_width / 2;
+     		 * int height = m_height / 2;
+		 */
+		
 		int width = m_width;
 		int height = m_height;
 
