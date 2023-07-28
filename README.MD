@@ -105,7 +105,5 @@ cd build/apex
 
 ![1](./screenshots/1.PNG)
 
-自瞄效果:
-
-[![video]](https://github.com/cs1ime/blacksun-framework/blob/master/videos/aimingeffect.mp4)
+[自瞄效果](https://streamvi.com/watch/1772658935995788)
 
