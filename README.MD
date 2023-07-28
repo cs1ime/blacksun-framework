@@ -67,7 +67,7 @@ reboot
 
 打开virt-manager
 
-创建一个名为**win10**的虚拟机,名字必须是win10
+创建一个名为**win10**的虚拟机,名字必须是win10,要给Ubuntu留至少4G内存,2个CPU Core
 
 网卡改为virtio模式,磁盘改为virtio模式,把独显加入虚拟机
 
