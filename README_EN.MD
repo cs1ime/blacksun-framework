@@ -64,7 +64,7 @@ reboot
 
 Open virt-manager
 
-Create a virtual machine named **win10**
+Create a virtual machine named **win10**. Be aware, you need to reserve at least 4GB of memory and 2 CPU cores for Ubuntu.
 
 Change the virtual network card to virtio mode, change the virtual disk to virtio mode, and add the discrete graphics card to the virtual machine
 
