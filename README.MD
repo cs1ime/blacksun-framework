@@ -1,57 +1,56 @@
+**English** | [简体中文](README_CN.md)
+
 # blacksun framework for QEMU/KVM game cheat development
 
-blacksun QEMU/KVM 辅助开发框架
+Already done
 
-已经做到
+- Memory access and rendering both run outside the virtual machine, it is possible to bypass all anti-cheating detections, because cloud gaming service providers often use KVM.
+- Modify Moonlight source code to render with imgui, compatible with vaapi(opengl), vdpau(sdlrender).
+- Achieve ultra-low latency Moonlight game streaming with NAT network mode.
+- Simulate keyboard and mouse input by sending SDL_Event to Moonlight.
+- Simulate a mouse with a 100Hz polling rate to achieve more realistic aiming.
+- Block side mouse button (the button that triggers aiming) inputs to the virtual machine to avoid some aim detection.
 
-- 绘制和读写都在虚拟机外部实现,绕过一切反作弊外挂检测(云游戏厂商都用的KVM虚拟机)
-- 修改moonlight源码实现imgui绘制,兼容vaapi(opengl),vdpau(sdlrender)
-- 利用NAT网络通信以做到超低延迟的moonlight串流画面
-- 通过对moonlight发送SDL_Event实现键鼠模拟
-- 模拟100hz回报率的鼠标进行自瞄以做到丝滑的自瞄效果
-- 屏蔽鼠标侧键(触发自瞄的按键)输入虚拟机以做到更隐蔽的自瞄
+## Instructions:
 
-## 使用方法:
+Environment: Ubuntu 22.04.2 LTS
 
-环境: Ubuntu 22.04.2 LTS
+### Prepare
 
-### 准备硬件
+Ubuntu needs a cpu integrated graphics or a discrete graphics card to decode video for moonlight. In addition, another powerful graphics card is needed to passthrough directly into the KVM virtual machine to run games.
 
-Ubuntu需要核显或者一张显卡来给moonlight做解码,还需要一张显卡直通进虚拟机运行游戏
+A laptop with a discrete graphics card can meet this requirement. Change the graphics device of the laptop to integrated graphics, and then connect the EDID Spoofer or a monitor to the HDMI port of the discrete graphics card to meet the requirements.
 
-一台带独显的笔记本完全满足这个要求,关闭独显直连就是内建显示器连接核显,独显接口插上显卡欺骗器或者显示器就可以了
+If you're using a desktop computer and the CPU's integrated graphics can work with a discrete graphics card, you'll need an EDID Spoofer. You should connect your monitor to the CPU's integrated graphics, and connect the EDID Spoofer to the discrete graphics card.
 
-如果你用的是台式电脑,CPU核显能和独立显卡一起工作,你需要一个显卡欺骗器,显示器连接CPU核显,显卡欺骗器连接独立显卡
+If you're using a desktop computer and your CPU doesn't have integrated graphics, you need to ensure that your computer motherboard has two PCIe x16 slots. You'll need an EDID Spoofer, a GT1030 graphics card, and make sure your power supply is sufficient. Take off the original graphics card from your computer, install the GT1030 into the first PCIe x16 slot on the motherboard, and place your original graphics card into the second PCIe x16 slot. This is done so that Ubuntu will treat the GT1030 as the Boot VGA device. Connect the monitor to the GT1030, and connect the EDID Spoofer to your original graphics card. Additionally, you need to install the NVIDIA graphics driver for Ubuntu.
 
-如果你用的是台式电脑,CPU没有核显,你需要确保你的电脑主板有两个PCIe x16的插槽,你需要一个显卡欺骗器,一张GT1030显卡,并确保电源功率足够,拆下你电脑上原有的显卡,把GT1030装到主板的第一个PCIe x16插槽,把你原有的显卡装到主板的第二个PCIe x16插槽,这样做是为了让Ubuntu把GT1030作为Boot VGA设备.显示器连接GT1030,显卡欺骗器连接原有的显卡就行了
-另外,你需要安装Ubuntu的NVIDIA显卡驱动
+### Installation
 
-### 虚拟机搭建
+Install Ubuntu 22.04.2 LTS
 
-安装Ubuntu 22.04.2 LTS
-
-初始化编译和运行所需的环境
+Install the environment required for compiling and running
 
 ```bash
 ./setup-build-env.sh
 ```
 
-重启Ubuntu
+Reboot
 
 ```bash
 reboot
 ```
 
-禁用Wayland 
+Disable Wayland 
 
 ```
 sudo apt install -y vim
 sudo vim /etc/gdm3/custom.conf
 
-取消注释 /etc/gdm3/custom.conf 中的 #WaylandEnable=false
+Uncomment #WaylandEnable=false in /etc/gdm3/custom.conf
 ```
 
-运行显卡直通脚本
+Run the script to setup vfio-pci
 
 ```bash
 cd gpu-passthrough
@@ -59,51 +58,49 @@ chmod +x *
 sudo bash gpu_passthrough.sh
 ```
 
-重启Ubuntu
+Reboot
 
 ```bash
 reboot
 ```
 
-打开virt-manager
+Open virt-manager
 
-创建一个名为**win10**的虚拟机,名字必须是win10,要给Ubuntu留至少4G内存,2个CPU Core
+Create a virtual machine named **win10**. Be aware, you need to reserve at least 4GB of memory and 2 CPU cores for Ubuntu.
 
-网卡改为virtio模式,磁盘改为virtio模式,把独显加入虚拟机
+Change the virtual network card to virtio mode, change the virtual disk to virtio mode, and add the discrete graphics card to the virtual machine
 
-安装win10 21h2
+Install Windows10 21h2 in the virtual machine
 
-执行Windows更新,下载安装显卡驱动
+Run Windows Update, manually download and install the graphics card driver
 
-虚拟机安装[Sunshine](https://github.com/LizardByte/Sunshine)串流软件
+Install [Sunshine](https://github.com/LizardByte/Sunshine) in the virtual machine
 
 
-### 编译辅助
+### Compile
 
 ```bash
-./setup-build-env.sh
 ./build.sh
 ```
 
-### 运行辅助
+### Run
 
 ```bash
 cd build/apex
 ./runcheat.sh
 ```
 
-辅助会启动一个moonlight,连接虚拟机,显示设置仅在第二个显示器上显示
+The cheat will launch a Moonlight client, use this to control the virtual machine
 
-下载安装Apex,运行游戏就能看到辅助效果,鼠标侧键自瞄
+Download Apex and enjoy it.
 
-## 未来将要做
+## ToDoList
 
-- [ ]  学习计算机图形学,并尝试做出UE引擎的外部光线追踪写法
-- [ ]  实现 EPT 读写执行分离,做一个Hook引擎和CEServer调试器
+- [ ]  Study computer graphics and try to implement the ray tracing algorithm of the Unreal Engine externally.
+- [ ]  Add the new feature of Ept breakpoint, implement Hook and CEServer.
 
-## 效果截图:
+## ScreenShots
 
 ![1](./screenshots/1.PNG)
 
-[自瞄效果](https://streamvi.com/watch/1772658935995788)
-
+[Aiming effect](https://streamvi.com/watch/1772658935995788)
