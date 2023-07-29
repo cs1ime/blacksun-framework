@@ -1,4 +1,4 @@
-**English** | [简体中文](README_CN.md)
+**English** | [简体中文](README_CN.MD)
 
 # blacksun framework for QEMU/KVM game cheat development
 
