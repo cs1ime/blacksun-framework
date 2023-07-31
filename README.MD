@@ -11,6 +11,10 @@ Already done
 - Simulate a mouse with a 100Hz polling rate to achieve more realistic aiming.
 - Block side mouse button (the button that triggers aiming) inputs to the virtual machine to avoid some aim detection.
 
+
+**Do not use this source code for illegal purposes!**
+
+
 ## Instructions:
 
 Environment: Ubuntu 22.04.2 LTS
