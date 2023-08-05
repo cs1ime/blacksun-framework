@@ -1,1 +1,0 @@
-#define __forceinline __attribute__((always_inline)) inline

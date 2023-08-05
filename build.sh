@@ -20,8 +20,8 @@ cd ..
 mkdir apex
 mkdir apex/lib
 
-cp build-framework/apex/apex apex
-cp build-framework/blacksun/moonlight-mydrawer/libmoonlight-mydrawer.so apex/lib
+cp build-framework/framework/examples/apex/apex apex
+cp build-framework/framework/moonlight-mydrawer/libmoonlight-mydrawer.so apex/lib
 cp build-moonlight/app/moonlight apex
 
 cd apex
