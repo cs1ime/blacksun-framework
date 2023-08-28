@@ -6,26 +6,28 @@
 namespace offsets {
 	const DWORD64 id = 0x8;
 
-	const DWORD64 health = 0x43c;
-	const DWORD64 health_max = 0x578;
-	const DWORD64 iSignifierName = 0x580;
-	const DWORD64 TeamNumber = 0x44c;
-	const DWORD64 base_pos = 0x14c;
-	const DWORD64 latestPrimaryWeapons = 0x1a14;
-	const DWORD64 bleedoutState = 0x2750;
-	const DWORD64 velocity = 0x488;
-	const DWORD64 ObserverTarget = 0x3500;
-	const DWORD64 ViewRender = 0x743bca0;
-	const DWORD64 Matrix = 0x11a350;
-	const DWORD64 local_player = 0x22048c8;
-	const DWORD64 entity_list = 0x1e54dc8;
-	const DWORD64 view_angles = 0x25a0;
-	const DWORD64 DynamicAngle = 0x2590;
-	const DWORD64 CameraPos = 0x1f50;
-	const DWORD64 aim_punch = 0x24b8;
+	const DWORD64 health = 0x470;//m_iHealth
+	const DWORD64 health_max = 0x5b0;//m_iMaxHealth
+	const DWORD64 iSignifierName = 0x5b8;//m_iSignifierName
+	const DWORD64 TeamNumber = 0x480;//m_iTeamNum
+	const DWORD64 base_pos = 0x17c;
+	const DWORD64 latestPrimaryWeapons = 0x1a44;//m_latestPrimaryWeapons
+	const DWORD64 bleedoutState = 0x2790;//m_bleedoutState
+	const DWORD64 velocity = 0x4bc;//m_vecVelocity
+	const DWORD64 ObserverTarget = 0x3540;//m_hObserverTarget
 
-	const DWORD64 bones = 0x0e98 + 0x48;
-	const DWORD64 bullet_velocity = 0x1F3C;
-	const DWORD64 VisibleTime = 0x1A70;
+	const DWORD64 ViewRender = 0x7472a28;//ViewRender
+	const DWORD64 Matrix = 0x11a350;//ViewMatrix
+	const DWORD64 local_player = 0x22245c8;//LocalPlayer
+	const DWORD64 entity_list = 0x1e74448;//cl_entitylist
+
+	const DWORD64 view_angles = 0x25e4 - 0x14;//m_ammoPoolCapacity - 0x14
+	const DWORD64 DynamicAngle = view_angles - 0x10;
+	const DWORD64 CameraPos = 0x1f80;//CPlayer!camera_origin
+	const DWORD64 aim_punch = 0x24e8;//m_currentFrameLocalPlayer.m_vecPunchWeapon_Angle
+
+	const DWORD64 bones = 0xec8 + 0x48;//m_nForceBone + 0x48
+	const DWORD64 bullet_velocity = 0x1f6c;//CWeaponX!m_flProjectileSpeed
+	const DWORD64 VisibleTime = 0x1aa0;//CPlayer!lastVisibleTime
 };
 #endif // !_OFFSETS_
