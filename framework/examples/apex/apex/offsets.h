@@ -8,6 +8,10 @@ namespace offsets {
 
 	const DWORD64 health = 0x470;//m_iHealth
 	const DWORD64 health_max = 0x5b0;//m_iMaxHealth
+
+	const DWORD64 shield = 0x1a0; //m_shieldHealth
+    	const DWORD64 shield_max = 0x1a4; //m_shieldHealthMax
+
 	const DWORD64 iSignifierName = 0x5b8;//m_iSignifierName
 	const DWORD64 TeamNumber = 0x480;//m_iTeamNum
 	const DWORD64 base_pos = 0x17c;
