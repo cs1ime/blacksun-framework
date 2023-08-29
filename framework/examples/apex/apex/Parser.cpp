@@ -169,39 +169,99 @@ bool w2s(vec3_t &from, vec3_t &to)
 	return true;
 }
 
+// 绘制玩家信息，使用渲染发送器来绘制玩家角色的可视化表示
 void DrawPlayers(rendsender *ctx)
 {
-
 	for (int i = 0; i < Vars::PlayerCount; i++)
 	{
 		Player *p = &Vars::PlayerList[i];
 
+		// 获取玩家角色的位置
 		vec3_t ppos = {}, pposh = {};
 		ppos = p->pos;
 		pposh = ppos;
 		pposh.z += 65.f;
 
 		vec3_t pos = {}, posh = {};
+		// 将世界坐标转换为屏幕坐标
 		if (w2s(ppos, pos) && w2s(pposh, posh))
 		{
+			// 计算角色边框的高度和宽度
 			float h = pos.y - posh.y;
 			float w = h / 2;
 
-			DWORD col = p->visible ? ImColor(255, 0, 0).Get() : ImColor(0, 0, 255).Get();
-
+			// 根据角色可见性设置颜色
+			uint32_t _Color = p->visible ? ImColor(255, 0, 0).Get() : ImColor(0, 0, 255).Get();
+			if(p->life_state != 0){
+				_Color = ImColor(255, 255, 255).Get();
+			}
+			// 计算角色边框的起始位置
 			float startx = posh.x - w / 2;
 			float starty = posh.y;
-			ctx->AddCornBox(startx, starty, w, h, col);
-			// ctx->AddCornBox(startx + 1, starty - 1, w - 2, h - 2, col);
+			// 向渲染发送器添加绘制角色边框的命令
+			ctx->AddBox(startx, starty, w, h, _Color);
+			// ctx->AddCornBox(startx, starty, w, h, col);
 
-			if (p->health_max > 0)
+			// 绘制血条和盾
+			if (p->health_max > 0 && p->life_state == 0)
 			{
-				float scale = (float)p->health / (float)p->health_max;
-				float lh = h;
-				float lx = startx - (w / 2);
-				float ly = starty + lh - (lh * scale);
+				// 计算血条的比例
+				_Color = ImColor(62, 189, 0).Get();
+				float scale = (float)p->health / (float)p->health_max;;
+				float shield_scale = 0;
+				// _ptb("shield:%d | ", p->shield);
+				// _ptb("shield_max:%d\r\n", p->shield_max);
+				if (p->shield > 0)
+				{
+					shield_scale = (float)p->shield / (float)p->shield_max;
+					if (p->shield_max == 50)
+					{
+						_Color = ImColor(255, 255, 255).Get();
+					}
+					else if (p->shield_max == 75)
+					{
+						_Color = ImColor(0, 191, 255).Get();
+					}
+					else if (p->shield_max == 100)
+					{
+						_Color = ImColor(153, 50, 204).Get();
+					}
+					else if (p->shield_max == 125)
+					{
+						_Color = ImColor(255, 0, 0).Get();
+					}
+				}
 
-				ctx->AddLine(lx, ly, lx, starty + lh, ImColor(0x3E, 0xBD, 0).Get());
+				float health_X = startx;
+				float health_Y = starty - 18;
+				float health_W = w;
+				float String_X = startx;
+				float String_Y = starty + h;
+				// float health_W = w * 2;
+				// health_X = health_X - (w / 2);
+				float health_length = (health_W - 2) * scale;
+				float shield_length = (health_W - 2) * shield_scale;
+				// 绘制护盾
+				ctx->AddBox(health_X + 1, health_Y + 1, shield_length, 2, _Color);
+				ctx->AddBox(health_X + 1, health_Y + 2, shield_length, 2, _Color);
+				// ctx->AddLine(lx, ly, lx, starty + lh, ImColor(0x3E, 0xBD, 0).Get());
+
+				// 护盾边框
+				ctx->AddBox(health_X, health_Y, health_W, 5, ImColor(255, 255, 255).Get());
+				// ctx->FillRect(0, 0, 50, 50, ImColor(58, 208, 45).Get());
+
+				// 绘制血条
+				ctx->AddBox(health_X + 1, health_Y + 9, health_length, 2, ImColor(62, 189, 0).Get());
+				ctx->AddBox(health_X + 1, health_Y + 10, health_length, 2, ImColor(62, 189, 0).Get());
+				// ctx->AddLine(lx, ly, lx, starty + lh, ImColor(0x3E, 0xBD, 0).Get());
+
+				// 血条边框
+				ctx->AddBox(health_X, health_Y + 8, health_W, 5, ImColor(255, 255, 255).Get());
+				// 绘制队标
+				// std::string _str = "[" + std::to_string(p->TeamNumber) + "]";
+				// const char *Str = _str.c_str();
+				// const char *Str = "sssssssssss";
+				// ctx->AddString(String_X, String_Y, Str, 12, ImColor(255, 255, 255).Get());
 			}
 		}
 	}
@@ -212,7 +272,7 @@ void DrawAll()
 	rendsender *ctx = m_backend->rend();
 	ctx->Begin();
 	// ctx->AddLine(0,0,100,100,ImColor(255,0,0).Get());
-	ctx->FillRect(0, 0, 100, 100, ImColor(58, 208, 45).Get());
+	// ctx->FillRect(0, 0, 100, 100, ImColor(58, 208, 45).Get());
 	DrawPlayers(ctx);
 	if (Vars::AimPlayer)
 	{
@@ -248,11 +308,11 @@ bool UpdateLocalPlayer(USHORT id)
 	//	return false;
 	ULONG64 LocalPlayer = mem::r<ULONG64>(Vars::pGameImage + offsets::local_player);
 	USHORT weapid = mem::r<USHORT>(LocalPlayer + offsets::latestPrimaryWeapons);
-	_ptb("weapid:%d\r\n", weapid);
+	// _ptb("weapid:%d\r\n", weapid);
 	if (weapid)
 	{
 		ULONG64 pWeap = *(ULONG64 *)(GlobalObjectCache + 0x20 * weapid);
-		p1x(pWeap);
+		// p1x(pWeap);
 		if (pWeap && MmiGetPhysicalAddress((PVOID)pWeap))
 		{
 			Vars::LocalPlayer = LocalPlayer;
@@ -266,7 +326,7 @@ bool UpdateLocalPlayer(USHORT id)
 			Vars::LocalDynamicAngle = mem::r<vec3_t>(LocalPlayer + offsets::DynamicAngle);
 			Vars::LocalWeapSpeed = mem::r<vec3_t>(pWeap + offsets::bullet_velocity);
 
-			_ptb("LocalWeapSpeed.z:%d\r\n", (int)Vars::LocalWeapSpeed.z);
+			// _ptb("LocalWeapSpeed.z:%d\r\n", (int)Vars::LocalWeapSpeed.z);
 
 			float temp = Vars::LocalViewAngle.x;
 			Vars::LocalViewAngle.x = Vars::LocalViewAngle.y;
@@ -297,6 +357,11 @@ bool ParsePlayer(Player *p)
 		p->TeamNumber = mem::read2<USHORT>(obj + offsets::TeamNumber);
 		if (p->TeamNumber == Vars::LocalTeamId)
 			return false;
+
+		p->shield = mem::read2<int>(obj + offsets::shield);
+		p->shield_max = mem::read2<int>(obj + offsets::shield_max);
+		// _ptb("shield:%d\r\n", p->shield);
+		// _ptb("shield_max:%d\r\n", p->shield_max);
 		p->velocity = mem::read2<vec3_t>(obj + offsets::velocity);
 
 		p->life_state = mem::read2<ULONG>(obj + offsets::bleedoutState);
@@ -425,7 +490,7 @@ void ParseAimPlayer()
 	for (size_t i = 0; i < size; i++)
 	{
 		Player *p = &Vars::PlayerList[i];
-		std::cout << "vaild_aimbot " << p->vaild_aimbot << std::endl;
+		// std::cout << "vaild_aimbot " << p->vaild_aimbot << std::endl;
 		if (p->vaild_aimbot && p->inrange)
 		{
 			if ((first == false) || (p->view_distance < _min))
@@ -493,7 +558,8 @@ bool UpdateData()
 	Vars::AimPlayer = 0;
 	Vars::m_uObseredCount = 0;
 
-	_ptb("update!");
+	// _ptb("update!");
+
 	// USHORT id = mem::r<USHORT>(Vars::pGameImage + offsets::local_player_id);
 	// if (id == 0)
 	//	return;
@@ -509,7 +575,7 @@ bool UpdateData()
 		{
 			Vars::PlayerCount = 0;
 			RtlZeroMemory(Vars::PlayerList, sizeof(Vars::PlayerList));
-			_ptb("Read Success!");
+			// _ptb("Read Success!");
 			if (!UpdateLocalPlayer(0))
 				return false;
 			_ptb("LocalPlayer Success!");
@@ -573,13 +639,13 @@ bool UpdateData()
 			ULONG64 pMatrix = mem::r<ULONG64>(ViewRender + offsets::Matrix);
 			if (pMatrix)
 			{
-				// DbgPrint("[112233] pMatrix:%p\n", pMatrix);
+				// DbgPrint("[Help] pMatrix:%p\n", pMatrix);
 				float mat[16] = {0};
 				mem::read(pMatrix, mat, 64);
 				UpdateMatrix(mat);
 			}
 		}
-		printf("[112233] Player count: %d\n", Vars::PlayerCount);
+		// printf("[Help] Player count: %d\n", Vars::PlayerCount);
 		{
 			static SHORT exec_lock = 0;
 			static ULONG64 exec_last_time = 0;
@@ -601,7 +667,7 @@ bool UpdateData()
 		ParseAimPlayer();
 		if (Vars::AimPlayer)
 		{
-			printf("[112233] AimPlayerId:%d\n", Vars::AimPlayer->EntityId);
+			printf("[Help] AimPlayerId:%d\n", Vars::AimPlayer->EntityId);
 		}
 		UpdateSmartAim();
 
@@ -613,7 +679,7 @@ bool UpdateData()
 				if (Flag::Aimbot && Vars::AimPlayer->visible)
 				{
 					isEnableAim = true;
-					printf("[112233] Aiming\n");
+					printf("[Help] Aiming\n");
 					result = true;
 				}
 			}
