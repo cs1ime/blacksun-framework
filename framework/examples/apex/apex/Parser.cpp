@@ -192,22 +192,24 @@ void DrawPlayers(rendsender *ctx)
 
 			// 根据角色可见性设置颜色
 			uint32_t _Color = p->visible ? ImColor(255, 0, 0).Get() : ImColor(0, 0, 255).Get();
-			if(p->life_state != 0){
+			if (p->life_state != 0)
+			{
 				_Color = ImColor(255, 255, 255).Get();
 			}
 			// 计算角色边框的起始位置
 			float startx = posh.x - w / 2;
 			float starty = posh.y;
 			// 向渲染发送器添加绘制角色边框的命令
-			ctx->AddBox(startx, starty, w, h, _Color);
-			// ctx->AddCornBox(startx, starty, w, h, col);
+			ctx->AddCornBox(startx, starty, w, h, _Color);
+			// ctx->AddBox(startx, starty, w, h, col);
 
 			// 绘制血条和盾
 			if (p->health_max > 0 && p->life_state == 0)
 			{
 				// 计算血条的比例
 				_Color = ImColor(62, 189, 0).Get();
-				float scale = (float)p->health / (float)p->health_max;;
+				float scale = (float)p->health / (float)p->health_max;
+				;
 				float shield_scale = 0;
 				// _ptb("shield:%d | ", p->shield);
 				// _ptb("shield_max:%d\r\n", p->shield_max);
@@ -232,36 +234,34 @@ void DrawPlayers(rendsender *ctx)
 					}
 				}
 
-				float health_X = startx;
-				float health_Y = starty - 18;
-				float health_W = w;
+				float health_X = startx - 18;
+				float health_Y = starty;
+				float health_H = h;
 				float String_X = startx;
 				float String_Y = starty + h;
 				// float health_W = w * 2;
 				// health_X = health_X - (w / 2);
-				float health_length = (health_W - 2) * scale;
-				float shield_length = (health_W - 2) * shield_scale;
+				float health_length = (health_H - 2) * scale;
+				float shield_length = (health_H - 2) * shield_scale;
 				// 绘制护盾
-				ctx->AddBox(health_X + 1, health_Y + 1, shield_length, 2, _Color);
-				ctx->AddBox(health_X + 1, health_Y + 2, shield_length, 2, _Color);
+				ctx->AddBox(health_X + 1, health_Y + 1, 2, shield_length, _Color);
+				ctx->AddBox(health_X + 2, health_Y + 1, 2, shield_length, _Color);
 				// ctx->AddLine(lx, ly, lx, starty + lh, ImColor(0x3E, 0xBD, 0).Get());
 
 				// 护盾边框
-				ctx->AddBox(health_X, health_Y, health_W, 5, ImColor(255, 255, 255).Get());
+				// ctx->AddBox(health_X, health_Y, 5, health_H, ImColor(255, 255, 255).Get());
 				// ctx->FillRect(0, 0, 50, 50, ImColor(58, 208, 45).Get());
 
 				// 绘制血条
-				ctx->AddBox(health_X + 1, health_Y + 9, health_length, 2, ImColor(62, 189, 0).Get());
-				ctx->AddBox(health_X + 1, health_Y + 10, health_length, 2, ImColor(62, 189, 0).Get());
+				ctx->AddBox(health_X + 9, health_Y + 1, 2, health_length, ImColor(62, 189, 0).Get());
+				ctx->AddBox(health_X + 10, health_Y + 1, 2, health_length, ImColor(62, 189, 0).Get());
 				// ctx->AddLine(lx, ly, lx, starty + lh, ImColor(0x3E, 0xBD, 0).Get());
 
 				// 血条边框
-				ctx->AddBox(health_X, health_Y + 8, health_W, 5, ImColor(255, 255, 255).Get());
+				// ctx->AddBox(health_X + 8, health_Y, 5, health_H, ImColor(255, 255, 255).Get());
 				// 绘制队标
 				// std::string _str = "[" + std::to_string(p->TeamNumber) + "]";
 				// const char *Str = _str.c_str();
-				// const char *Str = "sssssssssss";
-				// ctx->AddString(String_X, String_Y, Str, 12, ImColor(255, 255, 255).Get());
 			}
 		}
 	}
@@ -271,8 +271,12 @@ void DrawAll()
 {
 	rendsender *ctx = m_backend->rend();
 	ctx->Begin();
-	// ctx->AddLine(0,0,100,100,ImColor(255,0,0).Get());
-	// ctx->FillRect(0, 0, 100, 100, ImColor(58, 208, 45).Get());
+
+	// ctx->FillRect(50, 50, 100, 100, ImColor(255, 255, 255).Get());
+
+	// const char *Str = "sssssssssss";
+	// ctx->AddString(100, 100, Str, 12, ImColor(255, 255, 255).Get());
+
 	DrawPlayers(ctx);
 	if (Vars::AimPlayer)
 	{
