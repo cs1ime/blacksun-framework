@@ -2,7 +2,8 @@
 #ifndef _OFFSETS_
 #define _OFFSETS_
 #include "windows.h"
-
+// 2023-09-01 16:29:46
+// GameVersion=v3.0.42.35
 namespace offsets {
 	const DWORD64 id = 0x8;
 
@@ -10,7 +11,7 @@ namespace offsets {
 	const DWORD64 health_max = 0x5b0;//m_iMaxHealth
 
 	const DWORD64 shield = 0x1a0; //m_shieldHealth
-    	const DWORD64 shield_max = 0x1a4; //m_shieldHealthMax
+    const DWORD64 shield_max = 0x1a4; //m_shieldHealthMax
 
 	const DWORD64 iSignifierName = 0x5b8;//m_iSignifierName
 	const DWORD64 TeamNumber = 0x480;//m_iTeamNum
@@ -22,8 +23,8 @@ namespace offsets {
 
 	const DWORD64 ViewRender = 0x7472a28;//ViewRender
 	const DWORD64 Matrix = 0x11a350;//ViewMatrix
-	const DWORD64 local_player = 0x22245c8;//LocalPlayer
-	const DWORD64 entity_list = 0x1e74448;//cl_entitylist
+	const DWORD64 local_player = 0x2225640;//LocalPlayer
+	const DWORD64 entity_list = 0x1e754c8;//cl_entitylist
 
 	const DWORD64 view_angles = 0x25e4 - 0x14;//m_ammoPoolCapacity - 0x14
 	const DWORD64 DynamicAngle = view_angles - 0x10;
