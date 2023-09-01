@@ -15,15 +15,15 @@ namespace offsets {
 
 	const DWORD64 iSignifierName = 0x5b8;//m_iSignifierName
 	const DWORD64 TeamNumber = 0x480;//m_iTeamNum
-	const DWORD64 base_pos = 0x17c;
+	const DWORD64 base_pos = 0x170 + 0xC;//m_vecAbsVelocity + 0xC
 	const DWORD64 latestPrimaryWeapons = 0x1a44;//m_latestPrimaryWeapons
 	const DWORD64 bleedoutState = 0x2790;//m_bleedoutState
 	const DWORD64 velocity = 0x4bc;//m_vecVelocity
 	const DWORD64 ObserverTarget = 0x3540;//m_hObserverTarget
 
-	const DWORD64 ViewRender = 0x7472a28;//ViewRender
+	const DWORD64 ViewRender = 0x7473a28;//ViewRender
 	const DWORD64 Matrix = 0x11a350;//ViewMatrix
-	const DWORD64 local_player = 0x2225640;//LocalPlayer
+	const DWORD64 local_player = 0x2225640 + 0x8;//LocalPlayer
 	const DWORD64 entity_list = 0x1e754c8;//cl_entitylist
 
 	const DWORD64 view_angles = 0x25e4 - 0x14;//m_ammoPoolCapacity - 0x14
